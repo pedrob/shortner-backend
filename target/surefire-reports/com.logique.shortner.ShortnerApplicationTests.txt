@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.logique.shortner.ShortnerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.413 s - in com.logique.shortner.ShortnerApplicationTests

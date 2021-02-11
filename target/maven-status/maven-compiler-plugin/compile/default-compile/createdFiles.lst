@@ -1,0 +1,6 @@
+com/logique/shortner/models/URLs.class
+com/logique/shortner/repositories/URLsRepository.class
+com/logique/shortner/ShortnerApplication.class
+com/logique/shortner/utils/HashGenerator.class
+com/logique/shortner/controllers/URLsController.class
+com/logique/shortner/exceptions/ResourceNotFoundException.class
