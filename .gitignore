@@ -1,2 +1,9 @@
-.db_data
+.db_data/
 api.http
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+Makefile
+.env
