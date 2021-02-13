@@ -16,6 +16,8 @@ public class ApplicationUser {
     @Size(min = 4, max = 20)
     private String username;
     
+    @NotBlank
+    @Size(min = 6)
     private String password;
 
     public long getId() {
