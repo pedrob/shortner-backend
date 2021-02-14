@@ -1,4 +1,5 @@
 # Shortner Backend
+API rest do encurtador de links shortner, applicação completa aqui: https://shr-app.herokuapp.com/
 
 ## Requisitos
  
