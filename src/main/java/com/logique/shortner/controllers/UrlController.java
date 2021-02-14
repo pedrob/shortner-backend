@@ -26,31 +26,32 @@ public class UrlController {
     @Autowired
     private ApplicationUserRepository userRepository;
 
+    @Autowired
+    private HashGenerator hashGenerator;
+    
+    @Autowired
+    private TokenUtils tokenUtils;
+
     @GetMapping("/urls")
     public Page<Url> getUrls(@RequestHeader("Authorization") String token, @Value("{jwt.SECRET}") String SECRET, Pageable pageable) {
-        String username = new TokenUtils().getUsernameFromToken(SECRET, token);
+        String username = tokenUtils.getUsernameFromToken(SECRET, token);
         return urlRepository.findByUsername(pageable, username);
     }
 
     @PostMapping("/urls")
     public Url createUrl(@RequestHeader("Authorization") String token, @Value("{jwt.SECRET}") String SECRET, @RequestBody Map<String, String> payload) {
-        String username = new TokenUtils().getUsernameFromToken(SECRET, token);
+        String username = tokenUtils.getUsernameFromToken(SECRET, token);
         ApplicationUser user = userRepository.findByUsername(username);
         String originalUrl = payload.get("originalURL");
-        Date createdAt = new Date();
-        String hash = new HashGenerator().generate();
-        Url url = new Url();
-        url.setHash(hash);
-        url.setOriginalURL(originalUrl);
-        url.setCreatedAt(createdAt);
-        url.setUsername(user.getUsername());
+        String hash = hashGenerator.generate();
+        Url url = new Url(hash, originalUrl, new Date(), user.getUsername());
         return urlRepository.save(url);
     }
 
     @GetMapping("/su/{hash}")
     public RedirectView redirectToOriginalURL(@PathVariable String hash) {
         String url = urlRepository.findById(hash).map(Url::getOriginalURL).orElse(null);
-        if (url == null) throw new ResourceNotFoundException("URL not found");
+        if (url == null) throw new ResourceNotFoundException("URL não encontrada");
         return new RedirectView(url);
     }
 }

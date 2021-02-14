@@ -16,6 +16,17 @@ public class Url {
     private Date createdAt;
 
     private String username;
+    
+    public Url() {
+        
+    } 
+
+    public Url(String hash, String originalURL, Date createdAt, String username) {
+        this.hash = hash;
+        this.originalURL = originalURL;
+        this.createdAt = createdAt;
+        this.username = username;
+    }
 
 
     public String getHash() {
