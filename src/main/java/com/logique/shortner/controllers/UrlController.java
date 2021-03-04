@@ -40,6 +40,13 @@ public class UrlController {
         return urlRepository.save(url);
     }
 
+    @DeleteMapping("/urls/{hash}")
+    public void deleteUrl(@RequestHeader("Authorization") String token, @PathVariable String hash) {
+        String url = urlRepository.findById(hash).map(Url::getOriginalURL).orElse(null);
+        if (url == null) throw new ResourceNotFoundException("URL não encontrada");
+        urlRepository.deleteById(hash);
+    }
+
     @GetMapping("/su/{hash}")
     public RedirectView redirectToOriginalURL(@PathVariable String hash) {
         String url = urlRepository.findById(hash).map(Url::getOriginalURL).orElse(null);

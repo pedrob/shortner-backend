@@ -138,4 +138,40 @@ public class UrlControllerTest {
             .andExpect(status().isNotFound());
     }
 
+    @Test 
+    public void shouldRemoveUrlSuccessfully() throws Exception {
+        Optional<Url> url = Optional.of(new Url("a1b1c1", "https://dumburl.test.com/dsjdjdan", new Date(), "test"));
+        when(this.urlRepository.findById(eq("a1b1c1"))).thenReturn(url);
+        doNothing().when(urlRepository).deleteById("a1b1c1");
+        String token = tokenUtils.createToken("test");
+
+        mockMvc.perform(delete("/urls/a1b1c1").header("Authorization", "Bearer " + token))
+            .andExpect(status().isOk());
+
+        verify(this.urlRepository, times(1)).deleteById("a1b1c1");
+    }
+
+    @Test 
+    public void shouldFailToRemoveUrlWithoutToken() throws Exception {
+        Optional<Url> url = Optional.of(new Url("a1b1c1", "https://dumburl.test.com/dsjdjdan", new Date(), "test"));
+        when(this.urlRepository.findById(eq("a1b1c1"))).thenReturn(url);
+        doNothing().when(urlRepository).deleteById("a1b1c1");
+
+        mockMvc.perform(delete("/urls/a1b1c1"))
+            .andExpect(status().isForbidden());
+    }
+
+    @Test 
+    public void shouldFailToRemoveUrlWrongHash() throws Exception {
+        Optional<Url> url = Optional.of(new Url("a1b1c1", "https://dumburl.test.com/dsjdjdan", new Date(), "test"));
+        when(this.urlRepository.findById(eq("a1b1c1"))).thenReturn(url);
+        doNothing().when(urlRepository).deleteById("a1b1c1");
+        String token = tokenUtils.createToken("test");
+
+        mockMvc.perform(delete("/urls/wrongHash").header("Authorization", "Bearer " + token))
+            .andExpect(status().isNotFound());
+
+        verify(this.urlRepository, times(0)).deleteById("a1b1c1");
+    }
+
 }
