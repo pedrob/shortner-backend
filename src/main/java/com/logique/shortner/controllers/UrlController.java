@@ -4,7 +4,6 @@ import com.logique.shortner.exceptions.ResourceNotFoundException;
 import com.logique.shortner.models.ApplicationUser;
 import com.logique.shortner.models.Url;
 import com.logique.shortner.repositories.UrlRepository;
-import com.logique.shortner.repositories.ApplicationUserRepository;
 import com.logique.shortner.utils.HashGenerator;
 import com.logique.shortner.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.beans.factory.annotation.Value;
 import java.util.*;
 
 @CrossOrigin(origins = "*")
@@ -24,27 +22,23 @@ public class UrlController {
     private UrlRepository urlRepository;
 
     @Autowired
-    private ApplicationUserRepository userRepository;
-
-    @Autowired
     private HashGenerator hashGenerator;
     
     @Autowired
     private TokenUtils tokenUtils;
 
     @GetMapping("/urls")
-    public Page<Url> getUrls(@RequestHeader("Authorization") String token, @Value("{jwt.SECRET}") String SECRET, Pageable pageable) {
-        String username = tokenUtils.getUsernameFromToken(SECRET, token);
+    public Page<Url> getUrls(@RequestHeader("Authorization") String token, Pageable pageable) {
+        String username = tokenUtils.getUsernameFromToken(token);
         return urlRepository.findByUsername(pageable, username);
     }
 
     @PostMapping("/urls")
-    public Url createUrl(@RequestHeader("Authorization") String token, @Value("{jwt.SECRET}") String SECRET, @RequestBody Map<String, String> payload) {
-        String username = tokenUtils.getUsernameFromToken(SECRET, token);
-        ApplicationUser user = userRepository.findByUsername(username);
+    public Url createUrl(@RequestHeader("Authorization") String token, @RequestBody Map<String, String> payload) {
+        String username = tokenUtils.getUsernameFromToken(token);
         String originalUrl = payload.get("originalURL");
         String hash = hashGenerator.generate();
-        Url url = new Url(hash, originalUrl, new Date(), user.getUsername());
+        Url url = new Url(hash, originalUrl, new Date(), username);
         return urlRepository.save(url);
     }
 
