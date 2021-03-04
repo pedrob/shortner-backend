@@ -5,11 +5,11 @@
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/utils/HashGenerator.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/security/WebSecurity.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/security/JWTAuthenticationFilter.java
+/home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/exceptions/ResourceNotFoundException.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/security/SecurityConstants.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/service/UserDetailsServiceImpl.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/models/Url.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/security/JWTAuthorizationFilter.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/ShortnerApplication.java
-/home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/expections/ResourceNotFoundException.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/utils/TokenUtils.java
 /home/pedro/jobs/shortner-backend/src/main/java/com/logique/shortner/controllers/UrlController.java

@@ -2,9 +2,6 @@ package com.logique.shortner.models;
 
 import javax.persistence.*;
 import java.util.Date;
-
-import com.logique.shortner.models.ApplicationUser;
-
 @Entity
 public class Url {
     
@@ -51,6 +48,10 @@ public class Url {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getUsername() {
+        return this.username;
     }
 
     public void setUsername(String username) {

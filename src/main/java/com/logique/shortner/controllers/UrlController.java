@@ -1,7 +1,6 @@
 package com.logique.shortner.controllers;
 
 import com.logique.shortner.exceptions.ResourceNotFoundException;
-import com.logique.shortner.models.ApplicationUser;
 import com.logique.shortner.models.Url;
 import com.logique.shortner.repositories.UrlRepository;
 import com.logique.shortner.utils.HashGenerator;
@@ -9,7 +8,6 @@ import com.logique.shortner.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import java.util.*;

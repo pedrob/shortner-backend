@@ -8,3 +8,9 @@ target/*
 
 Makefile
 .env
+.classpath
+.factorypath
+.project
+
+.vscode/
+.settings/

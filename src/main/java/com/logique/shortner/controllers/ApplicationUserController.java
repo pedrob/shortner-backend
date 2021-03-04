@@ -3,7 +3,6 @@ package com.logique.shortner.controllers;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.logique.shortner.models.ApplicationUser;
 import com.logique.shortner.repositories.ApplicationUserRepository;
