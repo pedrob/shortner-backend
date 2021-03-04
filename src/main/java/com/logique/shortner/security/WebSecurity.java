@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 import com.logique.shortner.service.UserDetailsServiceImpl;
 import static com.logique.shortner.security.SecurityConstants.SIGN_UP_URL;
 
+import java.util.Collections;
+import static java.util.Arrays.asList;
+
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -53,7 +56,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
+    corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
+    corsConfiguration.setAllowedMethods(asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+    corsConfiguration.setAllowedHeaders(asList("Authorization", "Cache-Control", "Content-Type", "X-Origem"));
+    corsConfiguration.setExposedHeaders(asList("Authorization", "X-Origem"));
+    source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
 }
